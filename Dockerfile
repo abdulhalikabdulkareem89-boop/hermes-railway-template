@@ -64,7 +64,10 @@ CMD ["/app/scripts/entrypoint.sh"]
 FROM nousresearch/hermes-agent:${HERMES_IMAGE_VERSION} AS official
 
 USER root
-RUN npm install -g @openai/codex && codex --version
+RUN npm install -g @openai/codex \
+    && npm config get prefix \
+    && npm root -g \
+    && ls -la "$(npm config get prefix)/bin"
 
 ENV HERMES_HOME=/data/.hermes \
   HERMES_WRITE_SAFE_ROOT=/data \
