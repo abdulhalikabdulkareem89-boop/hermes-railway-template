@@ -63,6 +63,9 @@ CMD ["/app/scripts/entrypoint.sh"]
 
 FROM nousresearch/hermes-agent:${HERMES_IMAGE_VERSION} AS official
 
+USER root
+RUN npm install -g @openai/codex && codex --version
+
 ENV HERMES_HOME=/data/.hermes \
   HERMES_WRITE_SAFE_ROOT=/data \
   HERMES_LAZY_INSTALL_TARGET=/data/.hermes/lazy-packages \
