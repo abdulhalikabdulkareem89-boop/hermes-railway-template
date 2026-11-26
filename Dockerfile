@@ -63,6 +63,10 @@ CMD ["/app/scripts/entrypoint.sh"]
 
 FROM nousresearch/hermes-agent:${HERMES_IMAGE_VERSION} AS official
 
+ENV PATH="/opt/hermes/tools/node-26.12.1-linux-x64/bin:${PATH}"
+RUN npm install --global --prefix /opt/hermes/tools/node-26.12.1-linux-x64 @openai/codex \
+  && /opt/hermes/tools/node-26.12.1-linux-x64/bin/codex --version
+
 ENV HERMES_HOME=/data/.hermes \
   HERMES_WRITE_SAFE_ROOT=/data \
   HERMES_LAZY_INSTALL_TARGET=/data/.hermes/lazy-packages \
